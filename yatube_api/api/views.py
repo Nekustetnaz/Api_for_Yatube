@@ -1,5 +1,9 @@
-from rest_framework import filters, mixins, permissions, viewsets
+from rest_framework.filters import SearchFilter
+from rest_framework.mixins import CreateModelMixin, ListModelMixin
 from rest_framework.pagination import LimitOffsetPagination
+from rest_framework.permissions import IsAuthenticated
+from rest_framework.viewsets import (GenericViewSet, ModelViewSet,
+                                     ReadOnlyModelViewSet)
 
 from .permissions import AuthCheck
 from .serializers import (CommentSerializer, FollowSerializer, GroupSerializer,
@@ -7,7 +11,7 @@ from .serializers import (CommentSerializer, FollowSerializer, GroupSerializer,
 from posts.models import Comment, Group, Post
 
 
-class PostViewSet(viewsets.ModelViewSet):
+class PostViewSet(ModelViewSet):
     queryset = Post.objects.all()
     serializer_class = PostSerializer
     permission_classes = (AuthCheck,)
@@ -17,13 +21,13 @@ class PostViewSet(viewsets.ModelViewSet):
         serializer.save(author=self.request.user)
 
 
-class GroupViewSet(viewsets.ReadOnlyModelViewSet):
+class GroupViewSet(ReadOnlyModelViewSet):
     queryset = Group.objects.all()
     serializer_class = GroupSerializer
     permission_classes = (AuthCheck,)
 
 
-class CommentViewSet(viewsets.ModelViewSet):
+class CommentViewSet(ModelViewSet):
     serializer_class = CommentSerializer
     permission_classes = (AuthCheck,)
 
@@ -35,11 +39,10 @@ class CommentViewSet(viewsets.ModelViewSet):
                         post=Post.objects.get(id=self.kwargs['post_id']))
 
 
-class FollowViewSet(mixins.CreateModelMixin, mixins.ListModelMixin,
-                    viewsets.GenericViewSet):
+class FollowViewSet(CreateModelMixin, ListModelMixin, GenericViewSet):
     serializer_class = FollowSerializer
-    permission_classes = (permissions.IsAuthenticated,)
-    filter_backends = (filters.SearchFilter,)
+    permission_classes = (IsAuthenticated,)
+    filter_backends = (SearchFilter,)
     search_fields = ('following__username',)
 
     def get_queryset(self):
