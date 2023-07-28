@@ -45,7 +45,7 @@ GET /api/v1/follow/ -  get a list of user subscriptions;
 POST /api/v1/follow/ - subscribe to authors
 ```
 Updates to posts and comments are available only to authors.
-### Sign up new user
+### Sign up a new user
 ```
 POST /api/v1/users/ - create new user;
 POST /api/v1/jwt/create/ - get JWT token;
