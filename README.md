@@ -1,26 +1,25 @@
 # "API for the Yatube service" project
 ### Description
-Yatube is a service for publishing and commenting on posts.
+Yatube is a service for publishing and commenting on posts.<br>
 "API for the Yatube service" project rovides to interact with the Yatube using API requests.
 ### Main functions
 - Publish posts;
 - Comment on posts;
 - Subscribe to authors.
 ### Run project
-- Clone the repository:
+- Clone the repository:<br>
 ```git clone git@github.com:Nekustetnaz/api_final_yatube.git```
-- Create and activate virtual environment:
+- Create and activate virtual environment:<br>
 ```python3 -m venv venv```
-* For Linux/macOS
-    ```source env/bin/activate```
-* For Windows
-    ```source env/scripts/activate```
-```python3 -m pip install --upgrade pip```
-- Install dependencies form the "requirements.txt" file:
+- Activate virtual environment for Linux/macOS:<br>
+```source env/bin/activate```
+- Activate virtual environment For Windows:<br>
+```source env/scripts/activate```
+- Install dependencies form the "requirements.txt" file:<br>
 ```pip install -r requirements.txt```
-- Apply migrations:
+- Apply migrations:<br>
 ```python3 manage.py migrate```
-- Run the project:
+- Run the project:<br>
 ```python3 manage.py runserver```
 ### API endpoints for unauthorized users
 ```
@@ -73,9 +72,9 @@ POST /api/v1/jwt/create/ - get JWT token;
 }
 ```
 ### Technologies
-Python 3.7
-Django 2.2
-Django Rest Framework
+Python 3.7<br>
+Django 2.2<br>
+Django Rest Framework<br>
 JWT + Djoser
 ### Author
 Anton Akulov - https://github.com/Nekustetnaz
